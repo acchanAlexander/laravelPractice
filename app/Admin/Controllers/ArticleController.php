@@ -86,6 +86,8 @@ class ArticleController extends Controller
         $grid->category_id('Category id');
         $grid->sub_category_id('Sub category id');
         $grid->content('Content');
+        $grid->created_at('Created at');
+        $grid->updated_at('Updated at');
 
         return $grid;
     }
@@ -105,6 +107,8 @@ class ArticleController extends Controller
         $show->category_id('Category id');
         $show->sub_category_id('Sub category id');
         $show->content('Content');
+        $show->created_at('Created at');
+        $show->updated_at('Updated at');
 
         return $show;
     }
