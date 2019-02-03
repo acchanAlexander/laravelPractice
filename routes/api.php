@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 
+use App\SubCategory;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,3 +18,22 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/sub_categories', function (Request $request) {
+    $categoryId = $request->q;
+    return getSubCategoryListSqueezedByCategoryId($categoryId);
+});
+
+function getSubCategoryListSqueezedByCategoryId($categoryId)
+{
+    $allSubCategoryList = SubCategory::all();
+    $squeezedList = [];
+
+    foreach($allSubCategoryList as $subCategory) {
+      if($subCategory['category_id'] === (int)$categoryId) {
+          $squeezedList[] = $subCategory;
+      }
+    }
+
+    return $allSubCategoryList->wrap($squeezedList)->pluck('name', 'id');
+}

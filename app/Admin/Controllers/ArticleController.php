@@ -126,7 +126,7 @@ class ArticleController extends Controller
         $form = new Form(new Article);
 
         $form->text('title', 'Title');
-        $form->select('category_id', 'Category')->options(Category::all()->pluck('name', 'id'));
+        $form->select('category_id', 'Category')->options(Category::all()->pluck('name', 'id'))->load('sub_category_id', '/api/sub_categories');;
         $form->multipleSelect('sub_category_id', 'Sub category')->options(SubCategory::all()->pluck('name', 'id'));
         $form->text('content', 'Content');
 
