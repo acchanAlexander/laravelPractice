@@ -10,6 +10,9 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
+use App\Category;
+use App\SubCategory;
+
 class ArticleController extends Controller
 {
     use HasResourceActions;
@@ -123,8 +126,8 @@ class ArticleController extends Controller
         $form = new Form(new Article);
 
         $form->text('title', 'Title');
-        $form->number('category_id', 'Category id');
-        $form->text('sub_category_id', 'Sub category id');
+        $form->select('category_id', 'Category')->options(Category::all()->pluck('name', 'id'));
+        $form->multipleSelect('sub_category_id', 'Sub category')->options(SubCategory::all()->pluck('name', 'id'));
         $form->text('content', 'Content');
 
         return $form;
